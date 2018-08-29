@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wiki Parser</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"
+            integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<div>
+    <p id="wiki">
+        =Heading 1=
+        "This is normal text with a [[hyperlink1|piped hyperlink]]. This '''word''' should be '''bold'''."
+        ==Heading 2=='
+        ''This is italics''. [[hyperlink]]
+    </p>
+</div>
+<script>
+    window.onload = function(){
+        wikiParser('#wiki')
+    }
+</script>
+</body>
+<script>
+    function wikiParser(selector) {
+        let p = $(selector)
+        let val = p.text()
+        let boldRegex = /'''[^']+?'''(?= |$|)/
+        let arr = val.split('\n')
+        for (let i = 0; i < arr.length; i++) {
+            let res = arr[i].match(boldRegex)
+            while (res != null) {
+                let word = res[0].substring(3,res[0].length-3)
+                let s = '<b>'+word+'</b>'
+                arr[i] = arr[i].replace(res[0],s)
+                res = arr[i].match(boldRegex)
+            }
+        }
+        let pRegex = /''[^']+?''(?= |$|)/
+        for (let i = 0; i < arr.length; i++) {
+            let res = arr[i].match(pRegex)
+            while (res != null) {
+                let word = res[0].substring(2,res[0].length-2)
+                let s = '<i>'+word+'</i>'
+                arr[i] = arr[i].replace(res[0],s)
+                res = arr[i].match(boldRegex)
+            }
+        }
+        let h3Regex = /===[^=]+?===(?= |$|)/
+        for (let i = 0; i < arr.length; i++) {
+            let res = arr[i].match(h3Regex)
+            while (res != null) {
+                let word = res[0].substring(3,res[0].length-3)
+                let s = '<h3>'+word+'</h3>'
+                arr[i] = arr[i].replace(res[0],s)
+                res = arr[i].match(boldRegex)
+            }
+        }
+        let h2Regex = /==[^=]+?==(?= |$|)/
+        for (let i = 0; i < arr.length; i++) {
+            let res = arr[i].match(h2Regex)
+            while (res != null) {
+                let word = res[0].substring(2,res[0].length-2)
+                let s = '<h2>'+word+'</h2>'
+                arr[i] = arr[i].replace(res[0],s)
+                res = arr[i].match(boldRegex)
+            }
+        }
+        let h1Regex = /=[^=]+?=(?= |$|)/
+        for (let i = 0; i < arr.length; i++) {
+            let res = arr[i].match(h1Regex)
+            while (res != null) {
+                let word = res[0].substring(1,res[0].length-1)
+                let s = '<h1>'+word+'</h1>'
+                arr[i] = arr[i].replace(res[0],s)
+                res = arr[i].match(boldRegex)
+            }
+        }
+        let aRegex = /\[\[[^|]+?\]\](?= |$|)/
+        for (let i = 0; i < arr.length; i++) {
+            let res = arr[i].match(aRegex)
+            while (res != null) {
+                let word = res[0].substring(2,res[0].length-2)
+                let s = '<a href="wiki/link">'+word+'</a>'
+                arr[i] = arr[i].replace(res[0],s)
+                res = arr[i].match(boldRegex)
+            }
+        }
+        let a2Regex = /\[\[[^]+?\]\](?= |$|)/
+        for (let i = 0; i < arr.length; i++) {
+            let res = arr[i].match(a2Regex)
+            while (res != null && res[0].indexOf('|') !== -1) {
+                let word = res[0].substring(2,res[0].length-2).split('|')[1]
+                let s = '<a href="wiki/link">'+word+'</a>'
+                arr[i] = arr[i].replace(res[0],s)
+                res = arr[i].match(boldRegex)
+            }
+        }
+        let joined = arr.join('\n')
+        console.log(joined)
+        p.replaceWith(joined)
+    }
+</script>
+</html>

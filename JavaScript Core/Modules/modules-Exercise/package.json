@@ -1,0 +1,7 @@
+{
+  "name": "modules-Exercise",
+  "version": "0.0.1",
+  "dependencies": {
+    "systemjs": "^0.21.4"
+  }
+}

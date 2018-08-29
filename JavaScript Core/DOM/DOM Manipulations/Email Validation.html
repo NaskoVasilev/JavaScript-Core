@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Email validation</title>
+    <style>.error { border: 2px solid red; }</style>
+</head>
+<body onload="validate()">
+<label for="email">Enter email:</label>
+<input id="email" type="text"/>
+<script>
+    function validate() {
+        let input=document.getElementById('email');
+        let regex=/^[a-z]+@[a-z]+\.[a-z]+$/;
+        input.addEventListener("change", function() {
+            if(!regex.test(this.value)){
+                this.className='error';
+            }
+            else{
+                input.removeAttribute('class')
+            }
+        })
+    }
+</script>
+</body>
+</html>

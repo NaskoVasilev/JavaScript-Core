@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Multimath</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td><label for="playername">Player Name</label></td>
+        <td><input type="text" id="playername"></td>
+    </tr>
+    <tr>
+        <td><label for="factor">Factor</label></td>
+        <td><input type="text" id="factor" value="5"></td>
+    </tr>
+    <tr>
+        <td><label for="problemCount">Number of Problems</label></td>
+        <td><input type="text" id="problemCount"></td>
+    </tr>
+    <td></td>
+    <td><input type="button" id="startGame" value="Start Game">
+        <input type="button" id="calculate" value="Calculate Score" disabled="true"></td>
+    <tr>
+        <td></td>
+        <td>
+            <div id="game"></div>
+        </td>
+    </tr>
+
+    <td></td>
+    <td>
+        <div id="scores"><h2>Scoreboard</h2><h4>No scores yet</h4></div>
+    </td>
+</table>
+<script src="../node_modules/systemjs/dist/system.js"></script>
+
+<script>
+    System.import('./js/app.js');
+</script>
+</body>
+</html>

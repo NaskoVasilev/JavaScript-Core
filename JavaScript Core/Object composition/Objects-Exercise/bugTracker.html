@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <title>Bug Tracker</title>
+    <style>
+        #wrapper {
+            width: 800px;
+            border: 1px solid black;
+        }
+        #titlebar {
+            background-color: beige;
+            font-size: 2em;
+            padding: 0.5em;
+        }
+        .report {
+            margin: 1em;
+            border:1px solid black;
+            width: 400px;
+        }
+        .report .title {
+            background-color: cornflowerblue;
+            color: white;
+            padding: 0.25em;
+            position: relative;
+        }
+        .report .body p {
+            margin: 0.5em;
+        }
+        .report .title .status {
+            display: inline-block;
+            right: 0px;
+            position: absolute;
+            margin-right: 0.5em;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <div id="titlebar">Bug tracker</div>
+    <div id="content">
+
+    </div>
+</div>
+<script>
+    function getReportList(){
+        let reports=[];
+        let id=0;
+        function update(){
+            let content=$('#content');
+            content.empty();
+
+            for (const report of reports) {
+                let reportDiv=$(`<div class="report" id="report_${report.id}">`);
+                let body=$(`<div class="body">`);
+                let paragraph=$('<p>');
+                paragraph.text(report.description);
+                let footer=$(`<div class="title"><span class="author">Submitted by: ${report.author}</span><span class="status">${report.status} | ${report.severity}</span></div>`)
+                body.append(paragraph);
+                reportDiv.append(body);
+                reportDiv.append(footer);
+                content.append(reportDiv);
+            }
+        }
+        return {
+            report:function (author,description,reproducible,severity) {
+                let report={id,author,description,reproducible,severity,status:'Open'};
+                reports.push(report)
+                id++;
+                update();
+            },
+            setStatus:function (id, newStatus) {
+                for (const report of reports) {
+                    if(report.id===id){
+                        report.status=newStatus;
+                    }
+                }
+                update();
+            },
+            remove:function (id) {
+                for (let i = 0; i <reports.length; i++) {
+                    if(reports[i].id===id){
+                        reports.splice(i,1);
+                        break;
+                    }
+                }
+                update()
+            },
+            sort:function (method) {
+                if(method==='author'){
+                    reports.sort((a,b)=>{
+                        return a.author.localeCompare(b.author)
+                    })
+                }else if(method==='severity'){
+                    reports.sort((a,b)=>a.severity-b.severity)
+                }else{
+                    reports.sort((a,b)=>a.id-b.id)
+                }
+                update();
+            },
+            output:function () {
+                update();
+            }
+        }
+    }
+
+    let reportList=getReportList();
+    reportList.report('Nasko','article',true,10)
+    reportList.report('ivan','ivan article',true,5)
+    reportList.report('ivancho','dragan article',false,7)
+    reportList.setStatus(1,'newStatus')
+    reportList.sort('severity')
+    //reportList.output('#content')
+
+</script>
+</body>
+</html>

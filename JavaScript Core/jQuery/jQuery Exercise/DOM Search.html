@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM Search</title>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"
+            integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s="
+            crossorigin="anonymous"></script>
+    <style>
+        .add-controls, .search-controls {
+            width: 20em;
+            height: 2em;
+        }
+
+        input {
+            position: absolute;
+            left: 6em;
+        }
+
+        .button {
+            background-color: darkgrey;
+            color: white;
+            font-weight: bold;
+            position: absolute;
+            left: 15em;
+            border: 1px solid black;
+            padding: 0 5px 0 5px;
+        }
+
+        .result-controls .button {
+            position: relative;
+            left: 0;
+            font-size: 50%;
+            margin-right: 1em;
+            padding: 0;
+            bottom: 3px;
+        }
+
+        li {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+<div id="content"></div>
+<script>
+    function domSearch(selector, typeOfComparing) {
+        let content = $(selector)
+        content.addClass('items-content')
+
+        let controlDiv = $('<div>')
+        controlDiv.addClass("add-controls")
+        let textLabel = $('<label>');
+        textLabel.text("Enter text: ");
+        let textInput = $('<input>')
+        let addBtn = $('<a href="#" style="display: inline-block">Add</a>')
+        addBtn.addClass("button")
+        textLabel.append(textInput)
+        controlDiv.append(textLabel)
+        controlDiv.append(addBtn);
+
+        let resultDiv=$('<div class="result-controls"></div>')
+        let items=$('<ul class="items-list"></ul>');
+        $(addBtn).on('click',function () {
+            let item=$(`<li class="list-item"><strong>${textInput.val()}</strong></li>`)
+            let removeBtn=$('<a href="#" class="button">X</a>')
+            removeBtn.on('click',function () {
+                removeBtn.parent().remove();
+            })
+            item.prepend(removeBtn)
+            textInput.val("")
+            items.append(item)
+        })
+        resultDiv.append(items)
+
+        let searchDiv=$('<div class="search-controls"></div>')
+        let searchLabel=$('<label>Search: </label>')
+        let searchInput=$('<input>')
+        searchLabel.append(searchInput);
+        searchDiv.append(searchLabel)
+
+        searchLabel.on('input',function () {
+            findElements()
+            console.log('inline')
+
+        })
+
+        $(content).append(controlDiv)
+        content.append(searchDiv)
+        content.append(resultDiv)
+
+        function  findElements() {
+            let searchValue=searchInput.val();
+            let elemnts=$('ul li');
+            console.log('in funct')
+            if(typeOfComparing){
+                for (let i = 0; i <elemnts.length; i++) {
+                    if(elemnts[i].textContent.substr(1).includes(searchValue)){
+                        $(elemnts[i]).css('display','inline')
+                    }
+                    else{
+                        $(elemnts[i]).css('display','none')
+                    }
+                    console.log("for loop")
+                }
+            }
+            else{
+                for (let i = 0; i <elemnts.length; i++) {
+                    if(elemnts[i].textContent.substr(1).toLowerCase().includes(searchValue.toLowerCase())){
+                        $(elemnts[i]).css('display','inline')
+                    }
+                    else{
+                        $(elemnts[i]).css('display','none')
+                    }
+                    console.log("for loop")
+                }
+            }
+
+            if(searchValue===''){
+                elemnts.css('display','inline')
+            }
+        }
+
+    }
+</script>
+<script>
+    domSearch("#content", false);
+</script>
+</body>
+</html>

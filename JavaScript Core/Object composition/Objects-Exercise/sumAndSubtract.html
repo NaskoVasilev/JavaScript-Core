@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+</head>
+<body>
+<input type="text" id="num1" />
+<input type="text" id="num2" />
+<input type="text" id="result" readonly />
+<br>
+<button id="sumButton">
+    Sum</button>
+<button id="subtractButton">
+    Subtract</button>
+<script>
+    function getModel(){
+        let firstNum;
+        let secondNum;
+        let result;
+        let commandProcessor={
+            init:function (selector1,selector2,resultSelector) {
+                firstNum=$(selector1)
+                secondNum=$(selector2)
+                result=$(resultSelector)
+            },
+            add:function () {
+                let sum=Number(firstNum.val())+Number(secondNum.val());
+                result.val(sum)
+            },
+            subtract:function () {
+                let sum=Number(firstNum.val())-Number(secondNum.val());
+                result.val(sum)
+            }
+        }
+        return commandProcessor
+    }
+    let commandProcessor=getModel();
+
+    let addBtn=$('#sumButton')
+    addBtn.on('click',function () {
+        commandProcessor.init('#num1','#num2','#result');
+        commandProcessor.add()
+
+    })
+    let subtractBtn=$('#subtractButton')
+    subtractBtn.on('click',function () {
+        commandProcessor.init('#num1','#num2','#result');
+        commandProcessor.subtract()
+    })
+</script>
+</body>
+</html>
