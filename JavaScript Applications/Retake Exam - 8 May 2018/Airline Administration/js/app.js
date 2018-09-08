@@ -1,0 +1,9 @@
+$(()=>{
+    showHideMenuLinks()
+    if(sessionStorage.getItem('authToken')){
+        showHomeView()
+    }else{
+        showRegisterView()
+    }
+    attachEvents()
+})

@@ -1,0 +1,18 @@
+<div class="row">
+    <form id="create-entry-form" action="#/entry/create" method="post">
+        <div class="col wide">
+            <input name="type" placeholder="Product name">
+        </div>
+        <div class="col wide">
+            <input oninput="notify.updateTotal(event)" id="quantity" name="quantity" placeholder="Quantity">
+        </div>
+        <div class="col wide">
+            <input oninput="notify.updateTotal(event)" id="price" name="price" placeholder="Price per Unit">
+        </div>
+        <div id="total" class="col">Sub-total</div>
+        <div class="col">
+            <input id="addItemBtn" type="submit" value="Add" />
+        </div>
+        <input type="hidden" name="receiptId" value="{{receiptId}}">
+    </form>
+</div>

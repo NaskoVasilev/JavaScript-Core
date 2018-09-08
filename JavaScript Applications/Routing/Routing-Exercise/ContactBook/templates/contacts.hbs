@@ -1,0 +1,19 @@
+<section id="contacts">
+    <div class="container">
+        <div id="book" class="box-large">
+            <div id="list">
+                <h1>Contacts</h1>
+                {{#each users}}
+                    <div class="content">
+                        <div class="contact" data-id="{{_id}}" onclick="showDetails(event)">
+                            <span class="avatar small">&#9787;</span>
+                            <span class="title">{{fullName}}</span>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+            <div id="details">Details
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Airline Administration</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <script src="./js/jquery-3.1.1.min.js"></script>
+    <script src="./js/displayElements.js"></script>
+    <script src="./js/crudOperations.js"></script>
+    <script src="./js/attachEvents.js"></script>
+    <script src="./js/app.js"></script>
+</head>
+<body>
+
+<div id="container">
+    <nav>
+        <div class="left-container">
+            <ul>
+                <li id="homeLink"><a href="#">Home</a></li>
+                <li id="flightsLink"><a href="#">Flights</a></li>
+                <li id="loginLink"><a href="#">Login</a></li>
+                <li id="registerLink"><a href="#">Register</a></li>
+            </ul>
+        </div>
+        <div class="right-container" id="logoutLink">
+            <span>Welcome, {name} |</span>
+            <a href="#" class="log-out">Logout</a>
+        </div>
+    </nav>
+
+    <section id="viewRegister">
+        <h2>Create your account:</h2>
+        <form id="formRegister">
+            <label>Username:</label>
+            <input type="text" name="username" placeholder="Username" >
+            <label>Password:</label>
+            <input type="password" name="pass" placeholder="Password">
+            <label>Repeat Password:</label>
+            <input type="password" name="checkPass" placeholder="Repeat Password">
+            <input type="submit" id="register" class="register" value="Register">
+        </form>
+    </section>
+
+    <section id="viewLogin">
+        <h2>Login to your account:</h2>
+        <form id="formLogin">
+            <label>Username:</label>
+            <input type="text" name="username" placeholder="Enter your Email" >
+            <label>Password:</label>
+            <input type="password" name="pass" placeholder="Enter your Password">
+            <input type="submit" id="login" class="login" value="Login">
+        </form>
+    </section>
+
+
+    <section id="viewCatalog" class="background-img">
+        <a href="#" class="add-flight">Add Flight +</a>
+
+        <div class="added-flights" id="allFlights">
+        </div>
+    </section>
+
+    <section id="viewAddFlight">
+        <h2>Add new flight</h2>
+        <form id="formAddFlight">
+            <label>Destination:</label>
+            <input type="text" name="destination" placeholder="Destination" >
+            <label>Origin:</label>
+            <input type="text" name="origin" placeholder="Origin">
+			<label>Departure Date:</label>
+            <input type="date" name="departureDate">
+            <label>Departure Time:</label>
+            <input type="time" name="departureTime">
+            <label>Number of Seats:</label>
+            <input type="number" name="seats" placeholder="0">
+            <label>Cost per seat:</label>
+            <input type="number" step="2" name="cost" placeholder="0.00">
+            <label>Image:</label>
+            <input type="text" name="img">
+            <label>Is Public:</label>
+            <input type="checkbox" name="public">
+
+            <input type="submit" id="addFlight" class="create" value="Create">
+        </form>
+    </section>
+
+    <section id="viewFlightDetails">
+        <div class="ticket-area">
+
+        </div>
+    </section>
+
+    <section id="viewEditFlight">
+        <h2>Edit existing flight</h2>
+        <form id="formEditFlight">
+            <label>Destination:</label>
+            <input type="text" name="destination" placeholder="Destination" value="CLUJ-NAPOCA" >
+            <label>Origin:</label>
+            <input type="text" name="origin" placeholder="Origin" value="Sheffield">
+			<label>Departure Date:</label>
+            <input type="date" id="tt" name="departureDate" value="2018-04-28">
+            <label>Departure Time:</label>
+            <input type="time" name="departureTime" value="14:00">
+            <label>Number of Seats:</label>
+            <input type="number" name="seats" value="55">
+            <label>Cost per seat:</label>
+            <input type="number" step="2" name="cost" value="13.12">
+            <label>Image:</label>
+            <input type="text" name="img" value="http://airportcluj.ro/fisiere/userfiles/Bari_28.03.07_088.jpg">
+            <label>Is Public:</label>
+            <input type="checkbox" name="public" checked>
+            <input type="submit" class="save-changes" id="editBtn" value="Save Changes">
+        </form>
+    </section>
+
+    <section id="viewMyFlights">
+        <h3>Your Flights</h3>
+    </section>
+
+    <footer>@SoftUni Airlines</footer>
+</div>
+
+ <div id="notifications">
+        <div id="loadingBox" class="notification">
+            <span>Loading …</span>
+        </div>
+        <div id="infoBox" class="notification">
+            <span>Info</span>
+        </div>
+        <div id="errorBox" class="notification">
+            <span>Error</span>
+        </div>
+ </div>
+
+</body>
+</html>

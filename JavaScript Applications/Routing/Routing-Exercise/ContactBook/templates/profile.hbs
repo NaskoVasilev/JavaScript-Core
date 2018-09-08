@@ -1,0 +1,23 @@
+<section id="profile">
+    <div class="container">
+        <div class="box-large">
+            <h1>My Profile</h1>
+            <div class="content">
+                <div class="info">
+                    <div class="col centered">
+                        <span class="avatar">&#9787;</span>
+                        <button>Change</button>
+                    </div>
+                    <div class="col">
+                        <form class="profile-editor" action="#/profile" method="put">
+                            <label>Full name:</label><input type="text" name="fullName" value="{{fullName}}"><br>
+                            <label>Phone:</label><input type="text" name="phone" value="{{phone}}"><br>
+                            <label>E-mail:</label><input type="text" name="email" value="{{email}}"><br>
+                            <input type="submit" value="Save changes">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

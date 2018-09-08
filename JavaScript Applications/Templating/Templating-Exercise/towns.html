@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Town</title>
+    <script src="node_modules/handlebars/dist/handlebars.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+<input id="towns" type="text"/>
+<button id="btnLoadTowns">Load</button>
+<script id="render-towns" type="text/x-handlebars-template">
+    <div id="root">
+        {{#each towns}}
+        <li>{{name}}</li>
+        {{/each}}
+    </div>
+</script>
+</body>
+<script>
+    $(() => attachEvents())
+</script>
+<script>
+    function attachEvents() {
+        let townsHtml = $('#render-towns').html();
+        let template = Handlebars.compile(townsHtml)
+
+        $('#btnLoadTowns').click(function () {
+            let towns = $('#towns').val()
+                .split(', ')
+                .filter(e=>e!=="")
+                .map(element => ({name: element}))
+            console.log(towns)
+            let html = template({towns:towns});
+            $('div').empty();
+            $(document.body).append(html)
+            $('#towns').val('')
+        })
+    }
+
+</script>
+<script type="text/x-handlebars-template" id="towns-template">
+    // TODO: Create the template here
+</script>
+</html>

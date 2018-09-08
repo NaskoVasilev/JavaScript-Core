@@ -1,0 +1,11 @@
+<h2>Welcome to our contact book</h2>
+{{#if loggedIn}}
+    <div>You can see all contact here :
+        <a href="#/contacts">Contact book</a>
+    </div>
+{{else}}
+    <div>You can login/register here:
+        <a href="#/login">Login</a>
+        <a href="#/register">Register</a>
+    </div>
+{{/if}}
