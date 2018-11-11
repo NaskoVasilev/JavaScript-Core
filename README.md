@@ -37,4 +37,21 @@ Includes JS Fundamentals, JS Advanced and JS Applications courses.
 
    Final Exam - 392/400 points
 
+# JS Aplications
+
+1. Rest Services
+
+2. AJAX and JQuery AJAX
+
+3. Asynchronous Programming
+
+4. Templating
+
+5. Routing
+
+6. Single Page Applications
+
+7. JS Tools
+
+   Final Exam 100/100 points
 
